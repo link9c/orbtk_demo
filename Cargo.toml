@@ -1,0 +1,55 @@
+[package]
+name = "orb-hello"
+version = "0.1.0"
+authors = ["link9c <link9chen@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+orbtk-api = { version = "0.3.1-alpha3", path = "crates/api" }
+orbtk-css-engine = { version = "0.3.1-alpha3", path = "crates/css-engine" }
+orbtk-proc-macros = { version = "0.3.1-alpha3", path = "crates/proc-macros" }
+orbtk-render = { version = "0.3.1-alpha3", path = "crates/render" }
+orbtk-shell = { version = "0.3.1-alpha3", path = "crates/shell" }
+orbtk-theme = { version = "0.3.1-alpha3", path="crates/theme" }
+orbtk-utils = { version = "0.3.1-alpha3", path = "crates/utils" }
+orbtk-tree = { version = "0.3.1-alpha3", path="crates/tree" }
+orbtk-widgets = { version = "0.3.1-alpha3", path="crates/widgets" }
+dces = { git = "https://gitlab.redox-os.org/redox-os/dces-rust.git",  branch = "develop" }
+orbtk = "0.3.1-alpha1"
+
+
+[dev-dependencies]
+euc = "0.5.0"
+vek = "0.10.2"
+serde = "1.0.106"
+serde_derive = "1.0.106"
+
+[features]
+debug = ["orbtk-api/debug"]
+pathfinder = ["orbtk-shell/pfinder", "orbtk-render/pfinder"]
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["winuser","shobjidl"] }
+
+[target."cfg(windows)".build-dependencies]
+winres = "0.1"
+
+[dependencies.rusqlite]
+version = "0.21.0"
+features = ["bundled"]
+
+ 
+[workspace]
+members = [
+    "crates/utils",
+    "crates/tree",
+    "crates/proc-macros",
+    "crates/api",
+    "crates/css-engine", 
+    "crates/render",
+    "crates/shell",
+    "crates/theme",
+    "crates/widgets",
+]
